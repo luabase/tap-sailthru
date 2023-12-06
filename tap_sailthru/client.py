@@ -323,7 +323,8 @@ class SailthruClient:
                           (SailthruClientError,
                           SailthruServer5xxError,
                           SailthruClientStatsNotReadyError,
-                          Timeout),
+                          Timeout,
+                          ConnectionError),
                           max_tries=MAX_RETRIES,
                           factor=2)
     def _make_request(self, url, payload, method):
