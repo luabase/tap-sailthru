@@ -16,7 +16,7 @@ from singer import get_logger, metrics
 LOGGER = get_logger()
 
 # Backoff retries
-MAX_RETRIES = 3
+MAX_RETRIES = 20
 
 # timeout request after 300 seconds
 REQUEST_TIMEOUT = 300
@@ -326,7 +326,8 @@ class SailthruClient:
                           Timeout,
                           ConnectionError),
                           max_tries=MAX_RETRIES,
-                          factor=2)
+                          factor=2,
+                          max_value=60)
     def _make_request(self, url, payload, method):
 
         params, data = (None, payload) if method == 'POST' else (payload, None)
